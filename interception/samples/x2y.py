@@ -15,19 +15,18 @@ if __name__ == '__main__':
         interception.INTERCEPTION_FILTER_KEY_DOWN | interception.INTERCEPTION_FILTER_KEY_UP,
     )
 
-    keystroke = ffi.new('InterceptionKeyStroke *')
-    stroke = ffi.cast('InterceptionStroke *', keystroke)
+    stroke = ffi.new('InterceptionKeyStroke *')
     while True:
         device = interception.interception_wait(context)
         if not interception.interception_receive(context, device, stroke, 1):
             break
 
-        if keystroke.code == SCANCODE_X:
-            keystroke.code = SCANCODE_Y
+        if stroke.code == SCANCODE_X:
+            stroke.code = SCANCODE_Y
 
         interception.interception_send(context, device, stroke, 1)
 
-        if keystroke.code == SCANCODE_ESC:
+        if stroke.code == SCANCODE_ESC:
             break
 
     interception.interception_destroy_context(context)

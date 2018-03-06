@@ -85,7 +85,7 @@ typedef struct
     unsigned int information;
 } InterceptionKeyStroke;
 
-typedef char *InterceptionStroke;
+typedef void *InterceptionStroke;
 
 InterceptionContext interception_create_context(void);
 
@@ -103,9 +103,9 @@ InterceptionDevice interception_wait(InterceptionContext context);
 
 InterceptionDevice interception_wait_with_timeout(InterceptionContext context, unsigned long milliseconds);
 
-int interception_send(InterceptionContext context, InterceptionDevice device, const InterceptionStroke *stroke, unsigned int nstroke);
+int interception_send(InterceptionContext context, InterceptionDevice device, const InterceptionStroke stroke, unsigned int nstroke);
 
-int interception_receive(InterceptionContext context, InterceptionDevice device, InterceptionStroke *stroke, unsigned int nstroke);
+int interception_receive(InterceptionContext context, InterceptionDevice device, InterceptionStroke stroke, unsigned int nstroke);
 
 unsigned int interception_get_hardware_id(InterceptionContext context, InterceptionDevice device, void *hardware_id_buffer, unsigned int buffer_size);
 
