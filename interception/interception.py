@@ -1,7 +1,7 @@
 import sys
 import os as _os
 
-from _interception import ffi
+from ._interception import ffi
 
 _is_64bits = sys.maxsize > 2 ** 32
 
