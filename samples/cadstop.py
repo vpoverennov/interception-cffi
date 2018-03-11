@@ -25,9 +25,9 @@ ctrl_up = KeyStroke(SCANCODE.CTRL, lib.INTERCEPTION_KEY_UP)
 alt_up = KeyStroke(SCANCODE.ALT, lib.INTERCEPTION_KEY_UP)
 del_up = KeyStroke(SCANCODE.DEL, lib.INTERCEPTION_KEY_UP | lib.INTERCEPTION_KEY_E0)
 
-ctrl_is_down = 0
-alt_is_down = 0
-del_is_down = 0
+ctrl_is_down = False
+alt_is_down = False
+del_is_down = False
 
 
 def shall_produce_keystroke(kstroke):
@@ -35,17 +35,17 @@ def shall_produce_keystroke(kstroke):
 
     if ctrl_is_down + alt_is_down + del_is_down < 2:
         if kstroke == ctrl_down:
-            ctrl_is_down = 1
+            ctrl_is_down = True
         if kstroke == ctrl_up:
-            ctrl_is_down = 0
+            ctrl_is_down = False
         if kstroke == alt_down:
-            alt_is_down = 1
+            alt_is_down = True
         if kstroke == alt_up:
-            alt_is_down = 0
+            alt_is_down = False
         if kstroke == del_down:
-            del_is_down = 1
+            del_is_down = True
         if kstroke == del_up:
-            del_is_down = 0
+            del_is_down = False
         return True
 
     if ctrl_is_down == 0 and (kstroke == ctrl_down or kstroke == ctrl_up):
@@ -58,11 +58,11 @@ def shall_produce_keystroke(kstroke):
         return False
 
     if kstroke == ctrl_up:
-        ctrl_is_down = 0
+        ctrl_is_down = False
     elif kstroke == alt_up:
-        alt_is_down = 0
+        alt_is_down = False
     elif kstroke == del_up:
-        del_is_down = 0
+        del_is_down = False
 
     return True
 
