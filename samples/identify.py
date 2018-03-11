@@ -2,7 +2,7 @@ from interception import ffi, lib
 
 SCANCODE_ESC = 0x01
 
-# as ABI mode is used macros are not available
+# ABI mode is used so macros are not available
 INTERCEPTION_MAX_KEYBOARD = 10
 
 
