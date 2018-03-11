@@ -12,7 +12,11 @@ setup(
     py_modules=['interception_build'],
     cffi_modules=['interception_build.py:ffibuilder'],
     install_requires=['cffi>=1.0.0'],
-    packages=['interception'],
+    packages=['interception', 'interception.samples'],
+    package_dir={
+        'interception': 'interception',
+        'interception.samples': 'samples',
+    },
     package_data={
         'interception': ['interception.dll', 'interception64.dll'],
     },
