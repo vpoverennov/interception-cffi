@@ -144,7 +144,7 @@ int interception_is_keyboard(InterceptionDevice device);
 
 int interception_is_mouse(InterceptionDevice device);
 ''')
-ffibuilder.set_source('_interception', None)
+ffibuilder.set_source('interception._interception', None)
 
 if __name__ == '__main__':
     ffibuilder.compile()

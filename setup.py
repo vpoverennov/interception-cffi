@@ -9,7 +9,8 @@ setup(
     author_email='vasiliy@poverennov.com',
     url='https://github.com/vpoverennov/interception-cffi',
     setup_requires=['cffi>=1.0.0'],
-    cffi_modules=['interception/interception_build.py:ffibuilder'],
+    py_modules=['interception_build'],
+    cffi_modules=['interception_build.py:ffibuilder'],
     install_requires=['cffi>=1.0.0'],
     packages=['interception'],
     package_data={
