@@ -1,1 +1,5 @@
 .py[co]
+
+/build
+/dist
+/interception.egg-info
