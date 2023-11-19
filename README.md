@@ -17,7 +17,7 @@ For installation guide refer to interception readme located in the [interception
 Installation
 --------
 
-`pip install interception`
+`python -m pip install interception`
 
 
 Samples
