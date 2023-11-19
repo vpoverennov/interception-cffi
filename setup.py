@@ -5,7 +5,7 @@ setup(
     name='interception',
     version='0.5',
     description='interception cffi bindings',
-    author='vpoverennov',
+    author='Vasiliy Poverennov',
     author_email='vasiliy@poverennov.com',
     url='https://github.com/vpoverennov/interception-cffi',
     setup_requires=['cffi>=1.0.0'],
