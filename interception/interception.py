@@ -1,9 +1,9 @@
-import sys
+import sys as _sys
 import os as _os
 
 from ._interception import ffi
 
-_is_64bits = sys.maxsize > 2 ** 32
+_is_64bits = _sys.maxsize > 2 ** 32
 
 if _is_64bits:
     _libname = 'interception64.dll'
