@@ -1,0 +1,13 @@
+select = [
+    "ALL",
+]
+ignore = [
+    "COM812",
+    "ISC001",
+    "Q",
+]
+
+line-length = 200
+
+[format]
+quote-style = "single"
