@@ -1,5 +1,6 @@
 interception-cffi
 =================
+![PyPI - Version](https://img.shields.io/pypi/v/interception)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/interception)
 ![PyPI - Implementation](https://img.shields.io/pypi/implementation/interception)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/interception)
