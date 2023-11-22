@@ -1,5 +1,5 @@
 from interception import ffi, lib
-from interception.utils import raise_process_priority, try_open_single_program, close_single_program
+from interception.utils import close_single_program, raise_process_priority, try_open_single_program
 
 
 class SCANCODE:
@@ -8,7 +8,7 @@ class SCANCODE:
     CAPSLOCK = 0x3A
 
 
-class KeyStroke(object):
+class KeyStroke:
     def __init__(self, code, state):
         self.code = code
         self.state = state

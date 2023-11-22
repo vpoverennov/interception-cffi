@@ -1,1 +1,2 @@
-from .interception import ffi as ffi, lib as lib
+from .interception import ffi as ffi
+from .interception import lib as lib

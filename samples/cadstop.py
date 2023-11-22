@@ -9,7 +9,7 @@ class SCANCODE:
     DEL = 0x53
 
 
-class KeyStroke(object):
+class KeyStroke:
     def __init__(self, code, state):
         self.code = code
         self.state = state

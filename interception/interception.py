@@ -1,5 +1,5 @@
-import sys as _sys
 import os as _os
+import sys as _sys
 
 from ._interception import ffi
 

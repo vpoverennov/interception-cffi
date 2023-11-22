@@ -46,7 +46,7 @@ def try_open_single_program(name):
 
     program_instance = kernel32.CreateMutexA(ffi.NULL, FALSE, full_name)
     if ffi.getwinerror()[0] == ERROR_ALREADY_EXISTS or program_instance == ffi.NULL:
-        return
+        return None
     return program_instance
 
 

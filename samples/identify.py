@@ -31,13 +31,13 @@ if __name__ == '__main__':
 
         if lib.interception_is_keyboard(device):
             kstroke = ffi.cast('InterceptionKeyStroke *', stroke)
-            print('INTERCEPTION_KEYBOARD({})'.format(device - INTERCEPTION_KEYBOARD(0)))
+            print(f'INTERCEPTION_KEYBOARD({device - INTERCEPTION_KEYBOARD(0)})')
             if kstroke.code == SCANCODE_ESC:
                 break
         elif lib.interception_is_mouse(device):
-            print('INTERCEPTION_MOUSE({})'.format(device - INTERCEPTION_MOUSE(0)))
+            print(f'INTERCEPTION_MOUSE({device - INTERCEPTION_MOUSE(0)})')
         else:
-            print('UNRECOGNIZED({})'.format(device))
+            print(f'UNRECOGNIZED({device})')
 
         lib.interception_send(context, device, stroke, 1)
 
