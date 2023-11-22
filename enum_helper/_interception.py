@@ -3,7 +3,8 @@ import sys
 from cffi import FFI
 
 ffi = FFI()
-ffi.cdef('''
+ffi.cdef(
+    """
 enum InterceptionKeyState
 {
     INTERCEPTION_KEY_DOWN,
@@ -97,9 +98,14 @@ enum InterceptionMouseFlag
     INTERCEPTION_MOUSE_TERMSRV_SRC_SHADOW,
     ...
 };
-''')
+"""
+)
 
-_is_64bits = sys.maxsize > 2 ** 32
-lib = ffi.verify('''
+_is_64bits = sys.maxsize > 2**32
+lib = ffi.verify(
+    """
 #include "interception.h"
-''', libraries=['interception64' if _is_64bits else 'interception'], tmpdir='.')
+""",
+    libraries=['interception64' if _is_64bits else 'interception'],
+    tmpdir='.',
+)

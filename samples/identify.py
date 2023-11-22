@@ -16,13 +16,11 @@ def INTERCEPTION_MOUSE(index):
 
 
 if __name__ == '__main__':
-
     raise_process_priority()
 
     context = lib.interception_create_context()
 
-    lib.interception_set_filter(context, lib.interception_is_keyboard,
-                                lib.INTERCEPTION_FILTER_KEY_DOWN | lib.INTERCEPTION_FILTER_KEY_UP)
+    lib.interception_set_filter(context, lib.interception_is_keyboard, lib.INTERCEPTION_FILTER_KEY_DOWN | lib.INTERCEPTION_FILTER_KEY_UP)
     lib.interception_set_filter(context, lib.interception_is_mouse, lib.INTERCEPTION_FILTER_MOUSE_LEFT_BUTTON_DOWN)
 
     stroke = ffi.new('InterceptionMouseStroke *')

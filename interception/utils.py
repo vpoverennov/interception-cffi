@@ -10,7 +10,8 @@ ERROR_ALREADY_EXISTS = 0xB7
 
 ffi = FFI()
 ffi.set_unicode(False)
-ffi.cdef('''
+ffi.cdef(
+    """
 HANDLE GetCurrentProcess(void);
 BOOL  SetPriorityClass(HANDLE hProcess, DWORD dwPriorityClass);
 HANDLE CreateMutexA(void* lpMutexAttributes, BOOL bInitialOwner, LPCSTR lpName);
@@ -18,7 +19,8 @@ BOOL CloseHandle(HANDLE hObject);
 
 int WINAPI GetSystemMetrics(int nIndex);
 
-''')
+"""
+)
 kernel32 = ffi.dlopen('Kernel32.dll')
 user32 = ffi.dlopen('User32.dll')
 

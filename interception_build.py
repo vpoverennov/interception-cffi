@@ -1,7 +1,8 @@
 from cffi import FFI
 
 ffibuilder = FFI()
-ffibuilder.cdef('''
+ffibuilder.cdef(
+    """
 typedef void *InterceptionContext;
 typedef int InterceptionDevice;
 typedef int InterceptionPrecedence;
@@ -143,7 +144,8 @@ int interception_is_invalid(InterceptionDevice device);
 int interception_is_keyboard(InterceptionDevice device);
 
 int interception_is_mouse(InterceptionDevice device);
-''')
+"""
+)
 ffibuilder.set_source('interception._interception', None)
 
 if __name__ == '__main__':

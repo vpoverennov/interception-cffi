@@ -81,9 +81,7 @@ if __name__ == '__main__':
 
     context = lib.interception_create_context()
 
-    lib.interception_set_filter(context, lib.interception_is_keyboard,
-                                lib.INTERCEPTION_FILTER_KEY_DOWN |
-                                lib.INTERCEPTION_FILTER_KEY_UP)
+    lib.interception_set_filter(context, lib.interception_is_keyboard, lib.INTERCEPTION_FILTER_KEY_DOWN | lib.INTERCEPTION_FILTER_KEY_UP)
 
     kstroke = ffi.new('InterceptionKeyStroke *')
 
@@ -94,8 +92,6 @@ if __name__ == '__main__':
         kstrokes = caps2esc(kstroke[0])
 
         if kstrokes:
-            lib.interception_send(context, device,
-                                  ffi.new('InterceptionKeyStroke []', kstrokes),
-                                  len(kstrokes))
+            lib.interception_send(context, device, ffi.new('InterceptionKeyStroke []', kstrokes), len(kstrokes))
     lib.interception_destroy_context(context)
     close_single_program(program_instance)

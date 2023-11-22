@@ -68,7 +68,6 @@ def shall_produce_keystroke(kstroke):
 
 
 if __name__ == '__main__':
-
     raise_process_priority()
 
     context = lib.interception_create_context()

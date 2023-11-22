@@ -4,7 +4,6 @@ from interception.utils import raise_process_priority
 SCANCODE_ESC = 0x01
 
 if __name__ == '__main__':
-
     raise_process_priority()
 
     context = lib.interception_create_context()
