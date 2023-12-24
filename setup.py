@@ -3,7 +3,7 @@ from distutils.core import setup
 
 setup(
     name='interception',
-    version='0.5',
+    version='0.6.dev0',
     description='interception cffi bindings',
     author='Vasiliy Poverennov',
     author_email='vasiliy@poverennov.com',
