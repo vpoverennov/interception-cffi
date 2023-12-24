@@ -1,13 +1,8 @@
 select = [
-    "ALL",
+    "I",
+    "UP",
 ]
 ignore = [
-    "COM812",
-    "ISC001",
-    "Q",
-    "D203",
-    "D211",
-    "D213",
 ]
 
 line-length = 200
