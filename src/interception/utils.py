@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass as _dataclass
 
 from ._utils import ffi, lib as _utils_lib
