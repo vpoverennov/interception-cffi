@@ -1,7 +1,10 @@
 .py[co]
 
+.idea
+
+.coverage
+
 /build
 /dist
 /interception.egg-info
-.idea
 src/Release

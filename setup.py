@@ -8,12 +8,12 @@ setup(
     author='Vasiliy Poverennov',
     author_email='vasiliy@poverennov.com',
     url='https://github.com/vpoverennov/interception-cffi',
-    setup_requires=['cffi>=1.0.0'],
+    setup_requires=['cffi @ git+https://github.com/python-cffi/cffi.git'],
     cffi_modules=[
         'src/interception_build.py:ffibuilder',
         'src/utils_build.py:ffibuilder',
     ],
-    install_requires=['cffi>=1.0.0'],
+    install_requires=['cffi @ git+https://github.com/python-cffi/cffi.git'],
     packages=['interception', 'interception.samples'],
     package_dir={
         'interception': 'src/interception',
