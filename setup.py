@@ -19,6 +19,9 @@ setup(
         'interception': 'src/interception',
         'interception.samples': 'src/samples',
     },
+    package_data = {
+        'interception': ['py.typed'],
+    },
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass as _dataclass
+from typing import Any
 
 from ._utils import ffi, lib as _utils_lib
 
@@ -43,7 +44,7 @@ get_screen_height = _utils_lib.get_screen_height
 
 @_dataclass
 class ProgramHandle:
-    ptr: ffi.CData
+    ptr: Any
 
 
 def try_open_single_program(name: str) -> ProgramHandle | None:
@@ -54,4 +55,4 @@ def try_open_single_program(name: str) -> ProgramHandle | None:
 
 
 def close_single_program(program_instance: ProgramHandle) -> None:
-    _utils_lib.CloseHandle(program_instance.ptr)
+    _utils_lib.close_single_program(program_instance.ptr)
