@@ -157,4 +157,4 @@ int interception_is_mouse(InterceptionDevice device);
 )
 
 if __name__ == '__main__':
-    ffibuilder.compile(verbose=True)
+    ffibuilder.compile()
