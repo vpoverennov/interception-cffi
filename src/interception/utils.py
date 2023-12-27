@@ -1,6 +1,20 @@
-from dataclasses import dataclass
+from dataclasses import dataclass as _dataclass
 
-from cffi import FFI
+from ._utils import ffi, lib as _utils_lib
+
+__all__ = [
+    'raise_process_priority',
+    'lower_process_priority',
+    'ProgramHandle',
+    'try_open_single_program',
+    'HIGH_PRIORITY_CLASS',
+    'NORMAL_PRIORITY_CLASS',
+    'SM_CXSCREEN',
+    'SM_CYSCREEN',
+    'FALSE',
+    'TRUE',
+    'ERROR_ALREADY_EXISTS',
+]
 
 HIGH_PRIORITY_CLASS = 0x00000080
 NORMAL_PRIORITY_CLASS = 0x00000020
@@ -10,52 +24,32 @@ FALSE = 0
 TRUE = 1
 ERROR_ALREADY_EXISTS = 0xB7
 
-ffi = FFI()
-ffi.set_unicode(False)
-ffi.cdef(
-    """
-HANDLE GetCurrentProcess(void);
-BOOL  SetPriorityClass(HANDLE hProcess, DWORD dwPriorityClass);
-HANDLE CreateMutexA(void* lpMutexAttributes, BOOL bInitialOwner, LPCSTR lpName);
-BOOL CloseHandle(HANDLE hObject);
 
-int WINAPI GetSystemMetrics(int nIndex);
-
-"""
-)
-kernel32 = ffi.dlopen('Kernel32.dll')
-user32 = ffi.dlopen('User32.dll')
+def raise_process_priority():
+    """SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS)"""
+    _utils_lib.raise_process_priority()
 
 
-def raise_process_priority() -> None:
-    kernel32.SetPriorityClass(kernel32.GetCurrentProcess(), HIGH_PRIORITY_CLASS)
+def lower_process_priority():
+    """SetPriorityClass(GetCurrentProcess(), NORMAL_PRIORITY_CLASS)"""
+    _utils_lib.lower_process_priority()
 
 
-def lower_process_priority() -> None:
-    kernel32.SetPriorityClass(kernel32.GetCurrentProcess(), NORMAL_PRIORITY_CLASS)
+get_screen_width = _utils_lib.get_screen_width
+get_screen_height = _utils_lib.get_screen_height
 
 
-def get_screen_width() -> int:
-    return user32.GetSystemMetrics(SM_CXSCREEN)
-
-
-def get_screen_height() -> int:
-    return user32.GetSystemMetrics(SM_CYSCREEN)
-
-
-@dataclass
+@_dataclass
 class ProgramHandle:
     ptr: ffi.CData
 
 
 def try_open_single_program(name: str) -> ProgramHandle | None:
-    full_name = ffi.new('char[]', rb'Global\{%s}' % name.encode('ascii'))
-
-    program_instance = kernel32.CreateMutexA(ffi.NULL, FALSE, full_name)
-    if ffi.getwinerror()[0] == ERROR_ALREADY_EXISTS or program_instance == ffi.NULL:
+    program_instance = _utils_lib.try_open_single_program(rb'Global\{%s}' % name.encode('ascii'))
+    if program_instance == ffi.NULL:
         return None
     return ProgramHandle(program_instance)
 
 
 def close_single_program(program_instance: ProgramHandle) -> None:
-    kernel32.CloseHandle(program_instance.ptr)
+    _utils_lib.CloseHandle(program_instance.ptr)
