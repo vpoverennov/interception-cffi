@@ -19,9 +19,6 @@ setup(
         'interception': 'src/interception',
         'interception.samples': 'src/samples',
     },
-    package_data={
-        'interception': ['interception.dll', 'interception64.dll'],
-    },
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',

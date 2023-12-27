@@ -1,3 +1,4 @@
-/_interception.py
+/_interception.c
+/_interception.*.pyd
 /_utils.c
 /_utils.*.pyd
