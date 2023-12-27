@@ -26,9 +26,13 @@ def test_raise_lower():
 
 
 def test_open_close_single_program():
-    p = utils.try_open_single_program('interception_test')
-    assert p is not None
-    utils.close_single_program(p)
+    first = utils.try_open_single_program('interception_test')
+    second = utils.try_open_single_program('interception_test')
+
+    assert first is not None
+    assert second is None
+
+    utils.close_single_program(first)
 
 
 def test_screen_width():
