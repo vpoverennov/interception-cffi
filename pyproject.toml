@@ -1,6 +1,7 @@
 [tool.pyright]
 extraPaths = ["src"]
 typeCheckingMode = "strict"
+reportMissingModuleSource = "error"
 
 [tool.pytest.ini_options]
 pythonpath = [
