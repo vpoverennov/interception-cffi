@@ -14,6 +14,7 @@ setup(
         'src/utils_build.py:ffibuilder',
     ],
     install_requires=['cffi @ git+https://github.com/python-cffi/cffi.git'],
+    python_requires='>=3.8',
     packages=['interception', 'interception.samples'],
     package_dir={
         'interception': 'src/interception',
