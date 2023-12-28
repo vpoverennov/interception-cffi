@@ -23,8 +23,8 @@ Installation
 `python -m pip install interception`
 
 
-Samples
--------
+Usage
+-----
 
 Original samples are ported to python and can be found in [samples directory][samples]
 
