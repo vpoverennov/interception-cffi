@@ -3,7 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass as _dataclass
 from typing import Any
 
-from ._utils import ffi, lib as _utils_lib
+from ._utils import ffi
+from ._utils import lib as _utils_lib
 
 __all__ = [
     'raise_process_priority',

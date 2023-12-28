@@ -12,7 +12,6 @@ InterceptionPrecedence = int
 
 InterceptionFilter = int
 
-
 class _InterceptionMouseStroke:
     state: int
     flags: int
@@ -21,20 +20,16 @@ class _InterceptionMouseStroke:
     y: int
     information: int
 
-
 class _InterceptionKeyStroke:
     code: int
     state: int
     information: int
 
-
-#InterceptionStroke = InterceptionMouseStroke | InterceptionKeyStroke
+# InterceptionStroke = InterceptionMouseStroke | InterceptionKeyStroke
 InterceptionStroke = Any
-
 
 class InterceptionPredicate:
     def __call__(self, device: int) -> bool: ...
-
 
 class _InterceptionLib:
     INTERCEPTION_KEY_DOWN: int
@@ -113,34 +108,24 @@ class _InterceptionLib:
 
     @staticmethod
     def interception_create_context() -> InterceptionContext: ...
-
     @staticmethod
     def interception_destroy_context(context: InterceptionContext) -> None: ...
-
     @staticmethod
     def interception_get_precedence(context: InterceptionContext, device: InterceptionDevice) -> InterceptionPrecedence: ...
-
     @staticmethod
     def interception_set_precedence(context: InterceptionContext, device: InterceptionDevice, precedence: InterceptionPrecedence) -> None: ...
-
     @staticmethod
     def interception_get_filter(context: InterceptionContext, device: InterceptionDevice) -> InterceptionFilter: ...
-
     @staticmethod
     def interception_set_filter(context: InterceptionContext, predicate: InterceptionPredicate, filter: InterceptionFilter) -> None: ...
-
     @staticmethod
     def interception_wait(context: InterceptionContext) -> InterceptionDevice: ...
-
     @staticmethod
     def interception_wait_with_timeout(context: InterceptionContext, milliseconds: int) -> InterceptionDevice: ...
-
     @staticmethod
     def interception_send(context: InterceptionContext, device: InterceptionDevice, stroke: InterceptionStroke, nstroke: int) -> int: ...
-
     @staticmethod
     def interception_receive(context: InterceptionContext, device: InterceptionDevice, stroke: InterceptionStroke, nstroke: int) -> int: ...
-
     @staticmethod
     def interception_get_hardware_id(context: InterceptionContext, device: InterceptionDevice, hardware_id_buffer: Any, buffer_size: int) -> int: ...
 
@@ -155,6 +140,5 @@ class _InterceptionLib:
     # @staticmethod
     # def interception_is_mouse(device: InterceptionDevice) -> int: ...
     interception_is_mouse: InterceptionPredicate
-
 
 lib: _InterceptionLib

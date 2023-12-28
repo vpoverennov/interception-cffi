@@ -1,26 +1,27 @@
 from __future__ import annotations
+
 from typing import Any
 
 from interception import ffi, lib
 
 
 def test_key_stroke():
-    stroke: Any = ffi.new('InterceptionKeyStroke *', {'code': 42, 'state': 0x1, 'information': 0xff})
+    stroke: Any = ffi.new('InterceptionKeyStroke *', {'code': 42, 'state': 0x1, 'information': 0xFF})
 
     assert stroke.code == 42
     assert stroke.state == 0x1
-    assert stroke.information == 0xff
+    assert stroke.information == 0xFF
 
 
 def test_mouse_stroke():
-    stroke: Any = ffi.new('InterceptionMouseStroke *', {'state': 0x1, 'flags': 0x2, 'rolling': 0x3, 'x': 100, 'y': 200, 'information': 0xff})
+    stroke: Any = ffi.new('InterceptionMouseStroke *', {'state': 0x1, 'flags': 0x2, 'rolling': 0x3, 'x': 100, 'y': 200, 'information': 0xFF})
 
     assert stroke.state == 0x1
     assert stroke.flags == 0x2
     assert stroke.rolling == 0x3
     assert stroke.x == 100
     assert stroke.y == 200
-    assert stroke.information == 0xff
+    assert stroke.information == 0xFF
 
 
 def test_e2e():

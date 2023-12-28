@@ -19,7 +19,7 @@ setup(
         'interception': 'src/interception',
         'interception.samples': 'src/samples',
     },
-    package_data = {
+    package_data={
         'interception': ['py.typed'],
     },
     classifiers=[

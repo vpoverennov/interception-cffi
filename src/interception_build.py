@@ -7,13 +7,13 @@ ffibuilder = FFI()
 with open(base / '../interception_library/interception.c') as interception_c:
     ffibuilder.set_source(
         'interception._interception',
-        f'''
+        f"""
     #define INTERCEPTION_STATIC
     
     #include "interception.h"
     
     {interception_c.read()}
-    ''',
+    """,
         include_dirs=[base / '../interception_library'],
     )
 

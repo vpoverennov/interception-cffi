@@ -22,7 +22,7 @@ void close_single_program(void* program);
 ffibuilder.set_source(
     'interception._utils',
     libraries=['Kernel32', 'User32'],
-    source='''
+    source="""
 #include <windows.h>
 
 void raise_process_priority() {
@@ -47,7 +47,7 @@ void* try_open_single_program(const char* full_name) {
 void close_single_program(void* program) {
     CloseHandle(program);
 }
-''',
+""",
 )
 
 if __name__ == '__main__':
