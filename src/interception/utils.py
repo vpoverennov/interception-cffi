@@ -41,6 +41,8 @@ def lower_process_priority():
 
 get_screen_width = _utils_lib.get_screen_width
 get_screen_height = _utils_lib.get_screen_height
+busy_wait = _utils_lib.busy_wait
+calculate_busy_wait_millisecond = _utils_lib.calculate_busy_wait_millisecond
 
 
 @_dataclass
