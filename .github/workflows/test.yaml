@@ -24,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.8", "3.9", "3.10", "3.11", "3.12", "3.13.0-alpha.2" ]
+        python-version: [ "3.8", "3.9", "3.10", "3.11", "3.13.0-alpha.2" ]
         os: [ windows-latest ]
 
     steps:
@@ -46,11 +46,4 @@ jobs:
 
       - name: Unit tests
         run:
-          python -m pytest --cov
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        if:
-          matrix.python-version == '3.12'
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          python -m pytest
