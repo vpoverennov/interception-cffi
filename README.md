@@ -31,6 +31,9 @@ Original samples are ported to python and can be found in [samples directory][sa
 You can also execute them as scripts using
 `python -m interception.samples.x2y`
 
+or list using
+`python -m interception.samples`
+
 
 [interception]: https://github.com/oblitum/interception/
 [samples]: https://github.com/vpoverennov/interception-cffi/tree/master/samples
