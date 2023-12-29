@@ -12,7 +12,7 @@ Interception
 Low-level python binding for the `interception library<https://github.com/oblitum/Interception>`_ built using cffi
 
 Documentation
--------
+-------------
 
 `github <https://github.com/vpoverennov/interception-cffi>`_
 """,
