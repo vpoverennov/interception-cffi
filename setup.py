@@ -1,21 +1,25 @@
 #!/usr/bin/env python
+from textwrap import dedent
+
 from setuptools import setup
 
 setup(
     name='interception',
     version='0.6.dev0',
     description='interception cffi bindings',
-    long_description="""
-Interception
-============
-
-Low-level python binding for the `interception library<https://github.com/oblitum/Interception>`_ built using cffi
-
-Documentation
--------------
-
-`github <https://github.com/vpoverennov/interception-cffi>`_
-""",
+    long_description=dedent(
+        """
+        Interception
+        ============
+        
+        Low-level python binding for the `interception library<https://github.com/oblitum/Interception>`_ built using cffi
+        
+        Documentation
+        -------------
+        
+        `github <https://github.com/vpoverennov/interception-cffi>`_
+        """
+    ),
     author='Vasiliy Poverennov',
     author_email='vasiliy@poverennov.com',
     url='https://github.com/vpoverennov/interception-cffi',
