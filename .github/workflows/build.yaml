@@ -1,8 +1,8 @@
-name: Build
+name: Build and Publish
 
 on:
   push:
-
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,6 +14,7 @@ concurrency:
 jobs:
   sdist:
     runs-on: windows-latest
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -67,7 +68,8 @@ jobs:
           if-no-files-found: error
 
   publish-to-testpypi:
-    name: Publish Python 🐍 distribution 📦 to TestPyPI
+    name: Publish release to TestPyPI
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     needs:
     - sdist
     - build
