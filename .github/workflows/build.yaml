@@ -14,7 +14,6 @@ concurrency:
 jobs:
   sdist:
     runs-on: windows-latest
-    if: ${{ github.event_name == 'workflow_dispatch' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -32,6 +31,8 @@ jobs:
 
   build:
     runs-on: ${{ matrix.os }}
+    needs:
+    - sdist
     strategy:
       fail-fast: false
       matrix:
@@ -40,7 +41,9 @@ jobs:
         os: [ windows-latest ]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: re-actors/checkout-python-sdist@release/v1
+        with:
+          workflow-artifact-name: sdist
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
