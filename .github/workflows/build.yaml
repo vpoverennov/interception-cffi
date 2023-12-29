@@ -2,6 +2,8 @@ name: Build
 
 on:
   push:
+    branches:
+      - '*'
     tags:
       - '*'
     paths-ignore:
@@ -68,3 +70,28 @@ jobs:
         with:
           path: dist
           if-no-files-found: error
+
+  publish-to-testpypi:
+    name: Publish Python 🐍 distribution 📦 to TestPyPI
+    needs:
+    - sdist
+    - build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/interception
+
+    permissions:
+      id-token: write
+
+    steps:
+    - name: Download all the dists
+      uses: actions/download-artifact@v3
+      with:
+        path: dist/
+
+    - name: Publish distribution 📦 to TestPyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
