@@ -23,8 +23,9 @@ jobs:
           python -m build --sdist
 
       - name: upload sdist artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
+          name: sdist
           path: dist
           if-no-files-found: error
 
@@ -59,8 +60,9 @@ jobs:
           python -m build --wheel
 
       - name: upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
+          name: wheel-${{ matrix.python-version }}-${{ matrix.architecture }}
           path: dist
           if-no-files-found: error
 
@@ -80,8 +82,9 @@ jobs:
 
     steps:
     - name: Download all the dists
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
+        merge-multiple: true
         path: dist/
 
     - name: Publish distribution 📦 to TestPyPI
