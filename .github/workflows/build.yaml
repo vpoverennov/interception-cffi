@@ -2,13 +2,6 @@ name: Build
 
 on:
   push:
-    branches:
-      - '*'
-    tags:
-      - '*'
-    paths-ignore:
-      - "docs/**"
-      - "*.md"
 
 
 permissions:
