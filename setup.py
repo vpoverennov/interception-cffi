@@ -12,7 +12,7 @@ setup(
         Interception
         ============
         
-        Low-level python binding for the `interception library<https://github.com/oblitum/Interception>`_ built using cffi
+        Low-level python binding for the `interception library <https://github.com/oblitum/Interception>`_ built using cffi
         
         Documentation
         -------------
