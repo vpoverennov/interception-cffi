@@ -1,4 +1,4 @@
-cffi @ git+https://github.com/python-cffi/cffi.git
+cffi==1.17.1
 pycparser==2.21
 pyright==1.1.343
 pytest-cov==4.1.0
