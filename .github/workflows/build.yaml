@@ -1,13 +1,11 @@
-name: Build
+name: Build, Test, Publish
 
 on:
   push:
     tags:
       - '*'
-    paths-ignore:
-      - "docs/**"
-      - "*.md"
-
+    branches:
+      - '*'
 
 permissions:
   contents: read
@@ -17,24 +15,44 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  sdist:
+  build_sdist:
+    if: startsWith(github.ref, 'refs/tags/')
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.6.14"
+
+      - uses: astral-sh/ruff-action@v3
+      - uses: astral-sh/ruff-action@v3
+        with:
+          args: "format --check --diff"
+
+      - name: run pytest
+        run: |
+          uv run pytest --cov
+      - uses: codecov/codecov-action@v5.4.2
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: build sdist
         run: |
-          python -m pip install build
-          python -m build --sdist
+          uv build --sdist
 
       - name: upload sdist artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
+          name: sdist
           path: dist
           if-no-files-found: error
 
-  build:
+  build_wheels:
     runs-on: ${{ matrix.os }}
+    needs: [build_sdist]
     strategy:
       fail-fast: false
       matrix:
@@ -43,28 +61,135 @@ jobs:
         os: [ windows-latest ]
 
     steps:
-      - uses: actions/checkout@v4
-
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           architecture: ${{ matrix.architecture }}
 
-      - name: Upgrade pip
-        run: |
-          python -m pip install --upgrade pip
+      - name: Download sdist
+        uses: actions/download-artifact@v4
+        with:
+          name: sdist
+          path: dist
 
-      - name: Install dependencies
-        run: |
-          python -m pip install build
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.6.14"
+          enable-cache: false
 
       - name: build wheel
         run: |
-          python -m build --wheel
+          $sdist = Get-ChildItem -Path "dist\interception-*.tar.gz" -File | Select-Object -ExpandProperty FullName
+          uv build --wheel $sdist
 
       - name: upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
+          name: wheel-${{ matrix.python-version }}-${{ matrix.architecture }}
           path: dist
           if-no-files-found: error
+
+  test_wheel:
+    runs-on: windows-latest
+    needs: [build_wheels]
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+
+      - name: Download wheel
+        uses: actions/download-artifact@v4
+        with:
+          name: wheel-3.13-x64
+          path: dist
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.6.14"
+          enable-cache: false
+      - name: run pytest
+        run: |
+          uv sync --no-install-project
+          $sdist = Get-ChildItem -Path "dist\interception-*.tar.gz" -File | Select-Object -ExpandProperty FullName
+          uv pip install $sdist
+          uv run --no-sync pytest
+
+  publish_to_testpypi:
+    runs-on: ubuntu-latest
+    needs: [test_wheel]
+    if: startsWith(github.ref, 'refs/heads/')
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/interception
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+
+      - name: Download sdist
+        uses: actions/download-artifact@v4
+        with:
+          name: sdist
+          path: dist
+      - name: Download wheels
+        uses: actions/download-artifact@v4
+        with:
+          pattern: wheel-*
+          merge-multiple: true
+          path: dist
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.6.14"
+          enable-cache: false
+
+      - name: check
+        run: |
+          uvx twine check dist/*
+
+      - name: Publish distribution 📦 to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: [test_wheel]
+    if: startsWith(github.ref, 'refs/tags/')
+    environment:
+      name: pypi
+      url: https://pypi.org/p/interception
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+
+      - name: Download sdist
+        uses: actions/download-artifact@v4
+        with:
+          name: sdist
+          path: dist
+      - name: Download wheels
+        uses: actions/download-artifact@v4
+        with:
+          pattern: wheel-*
+          merge-multiple: true
+          path: dist
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.6.14"
+          enable-cache: false
+
+      - name: check
+        run: |
+          uvx twine check dist/*
+
+      - name: Publish distribution 📦
+        uses: pypa/gh-action-pypi-publish@release/v1
