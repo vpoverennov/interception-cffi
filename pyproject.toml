@@ -1,9 +1,45 @@
+[project]
+name = "interception"
+version = "0.6.dev4"
+description = "interception cffi bindings"
+authors = [
+  { name="Vasiliy Poverennov", email="vasiliy@poverennov.com" },
+]
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+license = "LGPL-3.0-or-later"
+dependencies = [
+    "cffi>=1.17.1",
+]
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.399",
+    "pytest-cov>=5.0.0",
+    "pytest>=8.3.5",
+    "ruff>=0.11.6",
+    "setuptools>=78.1.0; python_version >= '3.12'",
+]
+
+[build-system]
+requires = [
+    "cffi==1.17.1",
+    "setuptools==78.1.0",
+]
+build-backend = "setuptools.build_meta:__legacy__"
+
+[tool.setuptools.package-data]
+interception = ["py.typed"]
+
 [tool.pyright]
 extraPaths = ["src"]
 typeCheckingMode = "strict"
 reportMissingModuleSource = "error"
 
-[tool.pytest.ini_options]
-pythonpath = [
-    "src"
-]

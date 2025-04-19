@@ -2,19 +2,21 @@ from pathlib import Path
 
 from cffi import FFI
 
-base = Path(__file__).parent
+BASE = Path(__file__).parent
+LIB = BASE / 'interception_library'
+
 ffibuilder = FFI()
-with open(base / '../interception_library/interception.c') as interception_c:
+with open(LIB / 'interception.c') as interception_c:
     ffibuilder.set_source(
         'interception._interception',
         f"""
     #define INTERCEPTION_STATIC
-    
+
     #include "interception.h"
-    
+
     {interception_c.read()}
     """,
-        include_dirs=[base / '../interception_library'],
+        include_dirs=[LIB],
     )
 
 ffibuilder.cdef(

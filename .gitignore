@@ -6,5 +6,5 @@
 
 /build
 /dist
-/interception.egg-info
+interception.egg-info
 src/Release
