@@ -6,7 +6,7 @@ interception-cffi
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/interception)](https://pypi.org/project/interception/)
 [![PyPI - Wheel](https://img.shields.io/pypi/wheel/interception)](https://pypi.org/project/interception/)
 
-[![Actions status](https://github.com/vpoverennov/interception-cffi/workflows/CI/badge.svg)](https://github.com/vpoverennov/interception-cffi/actions)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/vpoverennov/interception-cffi/build.yaml)
 [![codecov](https://codecov.io/github/vpoverennov/interception-cffi/graph/badge.svg?token=UX0CP8IXON)](https://codecov.io/github/vpoverennov/interception-cffi)
 
 
