@@ -1,6 +1,6 @@
 [project]
 name = "interception"
-version = "0.6.0"
+version = "0.7.0.dev0"
 description = "interception cffi bindings"
 authors = [
   { name="Vasiliy Poverennov", email="vasiliy@poverennov.com" },
